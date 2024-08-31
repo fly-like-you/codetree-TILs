@@ -16,6 +16,7 @@ public class Main {
 
         for (int t = 0; t < T; t++){
             K = Integer.parseInt(br.readLine());
+            s.clear();
             for (int i = 0; i < K; i++) {
                 st = new StringTokenizer(br.readLine());
                 String cmd = st.nextToken();
