@@ -18,8 +18,8 @@ public class Main {
         }
         
         int answer = 0;
-        for (int i = 0; i < N - 2; i++) {
-            for (int j = 0; j < N - 2; j++) {
+        for (int i = 0; i <= N - 3; i++) {
+            for (int j = 0; j <= N - 3; j++) {
                 answer = Math.max(answer, find(i, j));
             }
         }
