@@ -42,7 +42,8 @@ public class Main {
         int maxCnt = 0;
         for (int i = 0; i < N; i++) {
             if (cur != seq[i]) {
-                l = 1;    
+                l = 1;
+                cur = seq[i];
             } else {
                 l++;
             }
