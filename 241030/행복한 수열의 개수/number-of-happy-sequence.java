@@ -6,6 +6,7 @@ public class Main {
     static StringTokenizer st;
     static int[][] arr;
     static int N, M;
+    static int[] seq;
 
     public static void main(String[] args) throws Exception {
         st = new StringTokenizer(br.readLine());
@@ -13,6 +14,7 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
         
         arr = new int[N][N];
+        seq = new int[N];
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -22,36 +24,30 @@ public class Main {
         }
         
         int answer = 0;
-        // column search
-        A: for (int j = 0; j < N; j++) {
-            for (int i = 0; i <= N - M; i++) {
-                int start = arr[i][j];
-                int l = 0;
-                for (int k  = i; k < i + M; k++) {
-                    if (start == arr[k][j]) l++;
-                }
-                if (l == M) {
-                    answer++;
-                    break A;
-                }
-                
-            }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) seq[j] = arr[i][j];
+            if (isHappySequence()) answer++;
         }
-        // row search
-        A: for (int j = 0; j < N; j++) {
-            
-            for (int i = 0; i <= N - M; i++) {
-                int start = arr[j][i];
-                int l = 0;
-                for (int k  = i; k < i + M; k++) {
-                    if (start == arr[j][k]) l++;
-                }
-                if (l >= M) {
-                    answer++;
-                    break A;
-                }
-            }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) seq[i] = arr[j][i];
+            if (isHappySequence()) answer++;
         }
         System.out.println(answer);
+    }
+    private static boolean isHappySequence() {
+        // 1 2 2 2 3 4 5
+        int l = 0;
+        int cur = seq[0];
+        for (int i = 0; i < N; i++) {
+            if (cur != seq[i]) {
+                l = 1;    
+            } else {
+                l++;
+            }
+            
+        }
+        
+        return l >= M;
     }
 }
