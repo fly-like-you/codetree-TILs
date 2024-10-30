@@ -39,15 +39,18 @@ public class Main {
         // 1 2 2 2 3 4 5
         int l = 0;
         int cur = seq[0];
+        int maxCnt = 0;
         for (int i = 0; i < N; i++) {
             if (cur != seq[i]) {
                 l = 1;    
             } else {
                 l++;
             }
+
+            maxCnt = Math.max(maxCnt, l);
             
         }
         
-        return l >= M;
+        return maxCnt >= M;
     }
 }
