@@ -20,28 +20,38 @@ public class Main {
                 arr[i][j] = Integer.parseInt(st.nextToken());
             }
         }
+        
         int answer = 0;
         // column search
         A: for (int j = 0; j < N; j++) {
-            int start = arr[0][j];
-            for (int i = 0; i < N; i++) {
-                if (start != arr[i][j]) {
-                    break A;   
+            for (int i = 0; i <= N - M; i++) {
+                int start = arr[i][j];
+                int l = 1;
+                for (int k  = i; k < i + M; k++) {
+                    if (start == arr[k][j]) l++;
+                }
+                if (l == M) {
+                    answer++;
+                    break A;
+                }
+                
+            }
+        }
+        // row search
+        A: for (int j = 0; j < N; j++) {
+            
+            for (int i = 0; i <= N - M; i++) {
+                int start = arr[j][i];
+                int l = 1;
+                for (int k  = i; k < i + M; k++) {
+                    if (start == arr[j][k]) l++;
+                }
+                if (l == M) {
+                    answer++;
+                    break A;
                 }
             }
-            answer++;
         }
         System.out.println(answer);
-        // row search
-                // column search
-        A: for (int j = 0; j < N; j++) {
-            int start = arr[j][0];
-            for (int i = 0; i < N; i++) {
-                if (start != arr[j][i]) {
-                    break A;   
-                }
-            }
-            answer++;
-        }
     }
 }
