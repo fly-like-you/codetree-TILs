@@ -46,7 +46,7 @@ public class Main {
                 for (int k  = i; k < i + M; k++) {
                     if (start == arr[j][k]) l++;
                 }
-                if (l == M) {
+                if (l >= M) {
                     answer++;
                     break A;
                 }
