@@ -21,7 +21,6 @@ public class Main {
         for (int i = 0; i <= N - 3; i++) {
             for (int j = 0; j <= N - 3; j++) {
                 answer = Math.max(answer, find(i, j));
-                System.out.println(find(i, j));        
             }
         }
         // 0 ~ N
@@ -30,8 +29,8 @@ public class Main {
 
     private static int find(int x, int y) {
         int sum = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = x; i < x + 3; i++) {
+            for (int j = y; j < y + 3; j++) {
                 sum += arr[i][j];
             }
         }
