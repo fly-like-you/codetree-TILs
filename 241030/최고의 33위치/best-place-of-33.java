@@ -21,9 +21,10 @@ public class Main {
         for (int i = 0; i <= N - 3; i++) {
             for (int j = 0; j <= N - 3; j++) {
                 answer = Math.max(answer, find(i, j));
+                System.out.println(find(i, j));        
             }
         }
-        
+        // 0 ~ N
         System.out.println(answer);
     }
 
