@@ -1,13 +1,46 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
-    static int N, M;
-    static int answer;
     static int[][] map;
+    static int answer;
+    static int N, M;
+    static int[][][] shapes = new int[][][]{
+            {{1, 1, 0}, {1, 0, 0}, {0, 0, 0}},
 
+            {{1, 1, 0}, {0, 1, 0}, {0, 0, 0}},
+
+            {{1, 0, 0}, {1, 1, 0}, {0, 0, 0}},
+
+            {{0, 1, 0}, {1, 1, 0}, {0, 0, 0}},
+
+            {{1, 1, 1}, {0, 0, 0}, {0, 0, 0}},
+
+            {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
+    };
+
+    private static int getMaxSum(int x, int y) {
+        int maxSum = 0;
+
+        for (int i = 0; i < 6; i++) {
+            boolean isPossible = true;
+            int sum = 0;
+            for (int dx = 0; dx < 3; dx++) {
+                for (int dy = 0; dy < 3; dy++) {
+                    // 사용자 정의 블록에서의 이동
+                    if (shapes[i][dx][dy] == 0) continue;
+                    if (x + dx >= N || y + dy >= M) isPossible = false;
+                    else sum += map[x + dx][y + dy];
+                }
+            }
+            if (isPossible) maxSum = Math.max(maxSum, sum);
+        }
+
+        return maxSum;
+    }
     public static void main(String[] args) throws Exception {
         // 여기에 코드를 작성해주세요.
         st = new StringTokenizer(br.readLine());
@@ -25,35 +58,12 @@ public class Main {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                boolean[][] visited = new boolean[N][M];
-                visited[i][j] = true;
-                dfs(0, 0, i, j, visited);
+                answer = Math.max(answer, getMaxSum(i, j));
             }
         }
 
         System.out.println(answer);
 
     }
-    static int[] dx = {-1, 1, 0, 0};
-    static int[] dy = {0, 0, -1, 1};
-    private static void dfs(int cur, int sum, int x, int y, boolean[][] visited) {
 
-        if (cur == 3) {
-            answer = Math.max(sum, answer);
-
-            return;
-        }
-
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
-            if (visited[nx][ny]) continue;
-
-            visited[nx][ny] = true;
-            dfs(cur + 1, sum + map[nx][ny], nx, ny, visited);
-            visited[nx][ny] = false;
-        }
-
-    }
 }
