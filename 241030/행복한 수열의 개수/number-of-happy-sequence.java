@@ -26,7 +26,7 @@ public class Main {
         A: for (int j = 0; j < N; j++) {
             for (int i = 0; i <= N - M; i++) {
                 int start = arr[i][j];
-                int l = 1;
+                int l = 0;
                 for (int k  = i; k < i + M; k++) {
                     if (start == arr[k][j]) l++;
                 }
