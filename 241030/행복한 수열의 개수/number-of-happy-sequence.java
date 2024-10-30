@@ -1,5 +1,3 @@
-package src.algo1030;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
