@@ -42,7 +42,7 @@ public class Main {
             
             for (int i = 0; i <= N - M; i++) {
                 int start = arr[j][i];
-                int l = 1;
+                int l = 0;
                 for (int k  = i; k < i + M; k++) {
                     if (start == arr[j][k]) l++;
                 }
