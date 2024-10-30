@@ -28,9 +28,8 @@ public class Main {
             for (int j = 0; j < N; j++) seq[j] = arr[i][j];
             if (isHappySequence()) answer++;
         }
-
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) seq[i] = arr[j][i];
+            for (int j = 0; j < N; j++) seq[j] = arr[j][i];
             if (isHappySequence()) answer++;
         }
         System.out.println(answer);
