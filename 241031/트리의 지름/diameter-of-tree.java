@@ -6,54 +6,78 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
+class Pair {
+    int num, dist;
+    public Pair(int num, int dist) {
+        this.num = num;
+        this.dist = dist;
+    }
+}
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
-    static ArrayList<int[]>[] adj;
+    static final int MAX_N = 100_000;
+    static ArrayList<Pair>[] edges = new ArrayList[MAX_N + 1];
+    static boolean[] visited = new boolean[MAX_N + 1];
+    static int[] dist = new int[MAX_N + 1];
     static int N;
-
     public static void main(String[] args) throws IOException {
         N = Integer.parseInt(br.readLine());
 
-        adj = new ArrayList[N + 1];
-        for (int i = 0; i < N + 1; i++) {
-            adj[i] = new ArrayList<>();
+        for (int i = 1; i <= N; i++) {
+            edges[i] = new ArrayList<>();
         }
 
-        for (int i = 0; i < N - 1; i++) {
+        for (int i = 1; i <= N - 1; i++) {
             st = new StringTokenizer(br.readLine());
             int from = Integer.parseInt(st.nextToken());
             int to = Integer.parseInt(st.nextToken());
             int w = Integer.parseInt(st.nextToken());
 
-            adj[from].add(new int[] {to, w});
-            adj[to].add(new int[] {from, w});
+            edges[from].add(new Pair(to, w));
+            edges[to].add(new Pair(from, w));
+        }
+        int fVertex = FindLargestVertex(1).num;
+        
+        int diameter = FindLargestVertex(fVertex).dist;
+
+        System.out.println(diameter);
+        
+
+    }
+
+    // 정점 x로부터 가장 멀리 있는 정점 정보 찾기
+    private static Pair FindLargestVertex(int x) {
+        for (int i = 1; i <= N; i++) {
+            visited[i] = false;
+            dist[i] = 0;
+        }
+        
+        visited[x] = true;
+        dist[x] = 0;
+        dfs(x, 0);
+        
+        int farthestDist = -1;
+        int farthestVertext = -1;
+        for (int i = 1; i <= N; i++) {
+            if (dist[i] > farthestDist) {
+                farthestDist = dist[i];
+                farthestVertext = i;
+            }
         }
 
-        int[] visited = new int[N + 1];
-        Arrays.fill(visited, -1);
-        visited[1] = 0;
-        dfs(visited, 1);
-
-        Arrays.fill(visited, -1);
-        visited[targetNode] = 0;
-        dfs(visited, targetNode);
-        System.out.println(longestDist);
+        return new Pair(farthestVertext, farthestDist);
     }
-    static int longestDist = 0;
-    static int targetNode = 0;
-    private static void dfs(int[] visited, int cur) {
 
-        for (int i = 0; i < adj[cur].size(); i++) {
-            int[] node = adj[cur].get(i);
-            int v = node[0], w = node[1];
-            if (visited[v] != -1) continue;
-            visited[v] = visited[cur] + w;
-            if (visited[v] > longestDist) {
-                targetNode = v;
-                longestDist = visited[v];
-            }
-            dfs(visited, v);
+    private static void dfs(int x, int totalDist) {
+        for (int i = 0; i < edges[x].size(); i++) {
+            int y = edges[x].get(i).num;
+            int d = edges[x].get(i).dist;
+            
+            if (visited[y]) continue;
+            visited[y] = true;
+            dist[y] = totalDist + d;
+            dfs(y, totalDist + d);
         }
     }
 }
