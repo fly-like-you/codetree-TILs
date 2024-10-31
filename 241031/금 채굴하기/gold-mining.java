@@ -22,43 +22,51 @@ public class Main {
                 map[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-        int answer = 0;
-        K = 2 * N;
-        while (K >= 0) {
-            int gold = getGold(K);
-            int cost = getCost(K);
-
-            if (gold - cost >= 0) {
-                answer = Math.max(answer, gold / M);
-            }
-            K--;
-        }
-        System.out.println(answer);
-    }
-
-    private static int getGold(int k) {
         int maxGold = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                maxGold = Math.max(maxGold, mine(i, j, k));
+                int numOfGold = 0;
+                for (int k = 0; k < 2 * (N - 1); k++) {
+                    numOfGold += getGoldBorder(i, j, k);
+
+                    if (numOfGold * M >= getArea(k)) {
+                        maxGold = Math.max(maxGold, numOfGold);
+                    }
+                }
             }
         }
-        return maxGold;
+        System.out.println(maxGold);
     }
 
-    private static int mine(int x, int y, int k) {
-        int gold = 0;
-        for (int i = x - k; i <= x + k; i++) {
-            for (int j = y - k; j <= y + k; j++) {
-                if (i < 0 || i >= N || j < 0 || j >= N) continue;
-                if ((Math.abs(x - i)) + Math.abs(y - j) > k) continue;
-                if (map[i][j] == 1) gold++;
-            }
-        }
-        return gold * M;
+    public static boolean inRange(int x, int y) {
+        return x >= 0 && x < N && y >= 0 && y < N;
     }
 
-    private static int getCost(int k) {
+    private static int getArea(int k) {
         return k * k + (k + 1) * (k + 1);
     }
+
+    static int[] dx = new int[]{1, 1, -1, -1};
+    static int[] dy = new int[]{-1, 1, 1, -1};
+
+    private static int getGoldBorder(int x, int y, int k) {
+        int numOfGold = 0;
+
+        if (k == 0) return map[x][y];
+
+        int curX = x - k, curY = y;
+
+        for (int curDir = 0; curDir < 4; curDir++) {
+            for (int step = 0; step < k; step++) {
+                if (inRange(curX, curY)) {
+                    numOfGold += map[curX][curY];
+                }
+                curX += dx[curDir];
+                curY += dy[curDir];
+            }
+        }
+        return numOfGold;
+    }
+
+
 }
