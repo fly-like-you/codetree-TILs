@@ -1,5 +1,3 @@
-package src.algo1031;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,6 +34,7 @@ public class Main {
         for (int i = 2; i < N + 1; i++) {
             sb.append(parents[i]).append("\n");
         }
+        System.out.println(sb);
     }
 
     private static void dfs(int[] visited, int cur) {
