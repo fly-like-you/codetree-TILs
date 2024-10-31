@@ -26,7 +26,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 int numOfGold = 0;
-                for (int k = 0; k < 2 * (N - 1); k++) {
+                for (int k = 0; k <= 2 * (N - 1); k++) {
                     numOfGold += getGoldBorder(i, j, k);
 
                     if (numOfGold * M >= getArea(k)) {
