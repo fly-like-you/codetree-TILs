@@ -14,12 +14,16 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         T = Integer.parseInt(st.nextToken());
         container = new int[2][N];
-        for (int i = 0; i < 2; i++) {
-            st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < N; j++) {
-                container[i][j] = Integer.parseInt(st.nextToken());
-            }
+
+        st = new StringTokenizer(br.readLine());
+        for (int j = 0; j < N; j++) {
+            container[0][j] = Integer.parseInt(st.nextToken());
         }
+        st = new StringTokenizer(br.readLine());
+        for (int j = N - 1; j >= 0; j--) {
+            container[1][j] = Integer.parseInt(st.nextToken());
+        }
+
         for (int t = 0; t < T; t++) {
             int temp1 = container[0][N - 1];
             for (int i = N - 1; i > 0; i--) {
@@ -35,12 +39,14 @@ public class Main {
 
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < N; j++) {
-                sb.append(container[i][j]).append(" ");
-            }
-            sb.append("\n");
+        for (int j = 0; j < N; j++) {
+            sb.append(container[0][j]).append(" ");
         }
+        sb.append("\n");
+        for (int j = N - 1; j >= 0; j--) {
+            sb.append(container[1][j]).append(" ");
+        }
+
         System.out.println(sb);
     }
 }
