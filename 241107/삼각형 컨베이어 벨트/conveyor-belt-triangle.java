@@ -27,12 +27,15 @@ public class Main {
         for (int i = 0; i < N; i++) {
             container[i + 2 * N] = Integer.parseInt(st.nextToken());
         }
-
-        int temp = container[3 * N - 1];
-        for (int i = 3 * N - 1; i > 0; i--) {
-            container[i] = container[i - 1];
+        T = T % (N * 3);
+        for (int t = 0; t < T; t++) {
+            int temp = container[3 * N - 1];
+            for (int i = 3 * N - 1; i > 0; i--) {
+                container[i] = container[i - 1];
+            }
+            container[0] = temp;
         }
-        container[0] = temp;
+
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < 3; i++) {
@@ -43,6 +46,17 @@ public class Main {
             sb.append("\n");
         }
         System.out.println(sb);
+//        for (int i = 0; i < 2; i++) {
+//            st = new StringTokenizer(br.readLine());
+//            for (int j = 0; j < N; j++) {
+//                container[i][j] = Integer.parseInt(st.nextToken());
+//            }
+//        }
+//        st = new StringTokenizer(br.readLine());
+//        for (int j = N - 1; j >= 0; j--) {
+//            container[2][j] = Integer.parseInt(st.nextToken());
+//        }
+
 
     }
 }
