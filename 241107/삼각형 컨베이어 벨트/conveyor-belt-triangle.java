@@ -47,8 +47,7 @@ public class Main {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < N; j++) {
-                int idx = i * N;
-                sb.append(container[idx + j]).append(" ");
+                sb.append(container[i][j]).append(" ");
             }
             sb.append("\n");
         }
