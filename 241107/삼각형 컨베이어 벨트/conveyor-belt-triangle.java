@@ -15,17 +15,12 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         T = Integer.parseInt(st.nextToken());
         container = new int[N * 3];
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
+
+        for (int i = 0; i < 3 * N; i++) {
+            if (st == null || !st.hasMoreTokens()) {
+                st = new StringTokenizer(br.readLine());
+            }
             container[i] = Integer.parseInt(st.nextToken());
-        }
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            container[i + N] = Integer.parseInt(st.nextToken());
-        }
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            container[i + 2 * N] = Integer.parseInt(st.nextToken());
         }
         T = T % (N * 3);
         for (int t = 0; t < T; t++) {
@@ -46,17 +41,5 @@ public class Main {
             sb.append("\n");
         }
         System.out.println(sb);
-//        for (int i = 0; i < 2; i++) {
-//            st = new StringTokenizer(br.readLine());
-//            for (int j = 0; j < N; j++) {
-//                container[i][j] = Integer.parseInt(st.nextToken());
-//            }
-//        }
-//        st = new StringTokenizer(br.readLine());
-//        for (int j = N - 1; j >= 0; j--) {
-//            container[2][j] = Integer.parseInt(st.nextToken());
-//        }
-
-
     }
 }
