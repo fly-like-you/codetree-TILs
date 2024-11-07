@@ -51,7 +51,7 @@ public class Main {
         int u = row - 1;
         int prev = row;
         boolean upCmd = cmd;
-        while (u > 0) {
+        while (u >= 0) {
             if (isCondition(mat[u], mat[prev])) {
                 upCmd = !upCmd;
                 sweep(mat[u], upCmd);
