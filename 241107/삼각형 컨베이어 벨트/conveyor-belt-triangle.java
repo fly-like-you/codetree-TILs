@@ -23,7 +23,7 @@ public class Main {
         }
 
         T = T % (N * 3);
-        while (T-- > 0) {
+        while (T-- >= 0) {
             int temp1 = container[0][N-1];
             for (int i = N - 1; i > 0; i--) {
                 container[0][i] = container[0][i-1];
