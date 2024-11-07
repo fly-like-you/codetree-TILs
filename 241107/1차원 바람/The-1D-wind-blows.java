@@ -45,30 +45,25 @@ public class Main {
         // 바람 불어서 밀기
         int[] arr = mat[row];
         sweep(arr, cmd);
-
-
         // 위 에서 밀었을 때 값이 같은지 비교하기
         int u = row - 1;
-        int prev = row;
+
         boolean upCmd = cmd;
         while (u >= 0) {
-            if (isCondition(mat[u], mat[prev])) {
+            if (isCondition(mat[u], mat[u+1])) {
                 upCmd = !upCmd;
                 sweep(mat[u], upCmd);
             } else break;
-            prev = u;
             u--;
         }
 
         int d = row + 1;
-        prev = row;
         boolean downCmd = cmd;
         while (d < N) {
-            if (isCondition(mat[d], mat[prev])) {
+            if (isCondition(mat[d], mat[d-1])) {
                 downCmd = !downCmd;
                 sweep(mat[d], downCmd);
             } else break;
-            prev = d;
             d++;
         }
     }
