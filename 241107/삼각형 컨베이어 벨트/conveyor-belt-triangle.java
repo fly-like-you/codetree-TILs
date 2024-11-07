@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main{
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
     static int[][] container;
@@ -23,7 +23,7 @@ public class Main {
         }
 
         T = T % (N * 3);
-        while (T-- >= 0) {
+        while (T-- > 0) {
             int temp1 = container[0][N-1];
             for (int i = N - 1; i > 0; i--) {
                 container[0][i] = container[0][i-1];
