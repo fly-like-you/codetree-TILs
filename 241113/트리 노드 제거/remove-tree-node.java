@@ -1,4 +1,5 @@
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,7 +30,10 @@ public class Main {
 			tree[node].add(parent);
 		}
 		cut = Integer.parseInt(br.readLine());
-		
+		if (cut == root) {
+			System.out.println(0);
+			return;
+		}
 		traversal(root, root);
 		System.out.println(answer);
 		
