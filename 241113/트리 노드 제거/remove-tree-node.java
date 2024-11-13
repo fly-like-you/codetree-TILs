@@ -1,4 +1,5 @@
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,11 +33,12 @@ public class Main {
 		
 	}
 	public static void traversal(int cur, int prev) {
+		if (tree[cur].size() == 1) answer++;
+		
 		for (int i = 0; i < tree[cur].size(); i++) {
 			int next = tree[cur].get(i);
 			if (next == prev) continue;
 			if (next == cut) continue;
-			answer++;
 			traversal(next, cur);
 		}
 	}
