@@ -1,5 +1,4 @@
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +9,7 @@ public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
 	static ArrayList<Integer>[] tree;
-	static int N, cut, answer;
+	static int N, cut, root, answer;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		// 트리 순회하기
 		N = Integer.parseInt(br.readLine());
@@ -22,25 +21,31 @@ public class Main {
 		st = new StringTokenizer(br.readLine());
 		for (int node = 0; node < N; node++) {
 			int parent = Integer.parseInt(st.nextToken());
-			if (parent == -1) continue;
+			if (parent == -1) {
+				root = node;
+				continue;
+			}
 			tree[parent].add(node);
 			tree[node].add(parent);
 		}
 		cut = Integer.parseInt(br.readLine());
-		if (cut == 0) {System.out.println(0);return;}
-		traversal(0, 0);
+		
+		traversal(root, root);
 		System.out.println(answer);
+		
 		
 	}
 	public static void traversal(int cur, int prev) {
-		if (cur == cut) {answer++; return;}
-		if (tree[cur].size() == 1) answer++;
 		
+		int leaves = 0;
 		for (int i = 0; i < tree[cur].size(); i++) {
 			int next = tree[cur].get(i);
 			if (next == prev) continue;
-			
+			if (next == cut) continue;
 			traversal(next, cur);
+			leaves++;
 		}
+//		System.out.println("cur: " + cur + ", leaves: " + leaves);
+		if (leaves == 0) answer++;
 	}
 }
